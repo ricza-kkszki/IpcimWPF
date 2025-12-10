@@ -57,5 +57,31 @@ namespace IpcimWPF
                 MessageBox.Show("Add meg a domain nevet és az ip címet!","Info",MessageBoxButton.OK,MessageBoxImage.Information);
             }
         }
+        private void mentes(object sender, RoutedEventArgs e)
+        {
+            if (domainList == null)
+            {
+                MessageBox.Show("Üres a domain lista!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string fajlba = "";
+            foreach (var d in domainList)
+            {
+                fajlba += $"{d.DomainName};{d.IpAddress}\n";
+            }
+            try
+            {
+                File.WriteAllText("csudh.txt", fajlba);
+                MessageBox.Show("Sikeres mentés!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show("Nem megfelelő argumentum!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IOException ioe)
+            {
+                MessageBox.Show("Hibás fájlmentés vagy elérési út!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
