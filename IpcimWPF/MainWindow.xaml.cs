@@ -44,5 +44,18 @@ namespace IpcimWPF
             }
             dataGrid.ItemsSource = domainList;
         }
+        private void bevitel(object sender, RoutedEventArgs e)
+        {
+            if (domainNameTextBox.Text.Length > 0 && ipTextBox.Text.Length > 0)
+            {
+                domainList.Add(new Domain(domainNameTextBox.Text, ipTextBox.Text));
+                dataGrid.ItemsSource = domainList;
+                dataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Add meg a domain nevet és az ip címet!","Info",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+        }
     }
 }
